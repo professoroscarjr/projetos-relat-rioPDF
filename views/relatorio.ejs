@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relatório de Dados</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Relatório de Clientes</h1>
+
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#filtroDataModal">
+            Filtrar por Data de Nascimento
+        </button>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>E-MAIL</th>
+                    <th>DT NASC.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(dado => { %>
+                    <tr>
+                        <td><%= dado.id %></td>
+                        <td><%= dado.name %></td>
+                        <td><%= dado.email %></td>
+                        <td><%= new Date(dado.dtnasc).toLocaleDateString("") %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <div class="text-right mt-4">
+            <p class="text-muted">Página 1</p>
+            <p class="text-muted">Gerado em: <%= new Date().toLocaleDateString("") %></p>
+        </div>
+    </div>
+
+    <div class="modal fade" id="filtroDataModal" tabindex="-1" role="dialog" aria-labelledby="filtroDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filtroDataModalLabel">Filtrar por Data de Nascimento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/relatorio/pdf" method="get">
+                        <div class="form-group">
+                            <label for="data_inicial">Data Inicial:</label>
+                            <input type="date" class="form-control" id="data_inicial" name="data_inicial">
+                        </div>
+                        <div class="form-group">
+                            <label for="data_final">Data Final:</label>
+                            <input type="date" class="form-control" id="data_final" name="data_final">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Filtrar e Gerar PDF</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Opcional: Adicionar um evento para limpar os campos do modal ao fechar
+        $('#filtroDataModal').on('hidden.bs.modal', function (e) {
+            $('#data_inicial').val('');
+            $('#data_final').val('');
+        })
+    </script>
+    
+</body>
+</html>
