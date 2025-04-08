@@ -17,3 +17,10 @@ COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=16
 ;
+
+
+//comandos git
+git init 
+git add .
+git commit -m "relatorio cidade"
+git push origin main
