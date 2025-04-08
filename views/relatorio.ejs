@@ -15,6 +15,9 @@
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#filtroDataModal">
             Filtrar por Data de Nascimento
         </button>
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#filtroDataModal2">
+            Cidade
+        </button>
 
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
@@ -31,14 +34,14 @@
                         <td><%= dado.id %></td>
                         <td><%= dado.name %></td>
                         <td><%= dado.email %></td>
-                        <td><%= new Date(dado.dtnasc).toLocaleDateString("") %></td>
+                        <td><%= new Date(dado.dtnasc).toLocaleDateString('pt-BR') %></td>
                     </tr>
                 <% }); %>
             </tbody>
         </table>
         <div class="text-right mt-4">
             <p class="text-muted">Página 1</p>
-            <p class="text-muted">Gerado em: <%= new Date().toLocaleDateString("") %></p>
+            <p class="text-muted">Gerado em: <%= new Date().toLocaleDateString('pt-BR') %></p>
         </div>
     </div>
 
@@ -62,6 +65,28 @@
                             <input type="date" class="form-control" id="data_final" name="data_final">
                         </div>
                         <button type="submit" class="btn btn-primary">Filtrar e Gerar PDF</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="filtroDataModal2" tabindex="-1" role="dialog" aria-labelledby="filtroDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+                    <form action="/relatorio/pdf2" method="get">
+                        <div class="form-group">
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" class="form-control" id="cidade" name="cidade">
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary">Buscar</button>
                     </form>
                 </div>
                 <div class="modal-footer">

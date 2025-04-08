@@ -1,6 +1,7 @@
 const express = require('express'); 
 const bodyParser = require('body-parser'); 
 const userController = require('./controllers/relatorioController'); 
+const cidadeController = require('./controllers/relCidadeController');
 const app = express(); // Cria uma instância do aplicativo Express.
 
 // Configura o EJS como mecanismo de visualização
@@ -14,6 +15,7 @@ app.get('/', userController.getAllUsers);
 
 // Rota para o gerador de PDF
 app.get('/relatorio/pdf', userController.generatePDF);
+app.get('/relatorio/pdf2', cidadeController.generatePDF);
 
 // Iniciar o servidor
 app.listen(2000, () => { 
